@@ -78,11 +78,12 @@ const MobileTagFilter = ({ tags, selectedTag, tagCounts, onTagClick }: TagFilter
   </Drawer>
 );
 
-export function TagFilter({ tags, selectedTag, tagCounts }: TagFilterProps) {
+export function TagFilter({ tags, selectedTag, tagCounts, onTagClick }: TagFilterProps) {
   const router = useRouter();
   const pathname = usePathname();
 
   const handleTagClick = (tag: string) => {
+    onTagClick(tag);
     const params = new URLSearchParams();
     if (tag !== 'All') {
       params.set('tag', tag);

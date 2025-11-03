@@ -16,20 +16,15 @@ interface TableOfContentsProps {
 export function TableOfContents({ className }: TableOfContentsProps) {
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string>('');
-  const hasInitialized = useRef(false);
+  const observerRef = useRef<MutationObserver | null>(null);
 
   useEffect(() => {
-    // Prevent cascading renders by only running once
-    if (hasInitialized.current) return;
-    hasInitialized.current = true;
-
-    // Defer setState to next tick to avoid cascading render warning
     const updateHeadings = () => {
       // Look for headings specifically in the prose content
       const proseElement = document.querySelector('.prose');
       if (!proseElement) return;
 
-      const headingElements = proseElement.querySelectorAll('h1, h2, h3');
+      const headingElements = proseElement.querySelectorAll('h1, h2, h3, h4, h5, h6');
       const headingsArray: Heading[] = [];
 
       headingElements.forEach(element => {
@@ -42,13 +37,40 @@ export function TableOfContents({ className }: TableOfContentsProps) {
         }
       });
 
-      setHeadings(headingsArray);
+      // Only update if headings have changed
+      if (headingsArray.length > 0) {
+        setHeadings(prev => {
+          const hasChanged = prev.length !== headingsArray.length || prev.some((h, i) => h.id !== headingsArray[i]?.id);
+          return hasChanged ? headingsArray : prev;
+        });
+      }
     };
 
-    // Use longer timeout to ensure MDX content is rendered
-    const timeoutId = setTimeout(updateHeadings, 100);
+    // Initial check
+    updateHeadings();
 
-    return () => clearTimeout(timeoutId);
+    // Set up MutationObserver to watch for DOM changes
+    const proseElement = document.querySelector('.prose');
+    if (proseElement) {
+      observerRef.current = new MutationObserver(() => {
+        updateHeadings();
+      });
+
+      observerRef.current.observe(proseElement, {
+        childList: true,
+        subtree: true
+      });
+    }
+
+    // Fallback timeout for slower renders
+    const timeoutId = setTimeout(updateHeadings, 500);
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   useEffect(() => {

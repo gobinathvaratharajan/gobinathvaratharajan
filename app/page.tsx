@@ -5,6 +5,7 @@ import { TagFilter } from '@/components/tag-filter';
 import { FlickeringGrid } from '@/components/ui/canva/flicker-grid';
 import { useBlogPosts } from '@/app/hooks/useBlogPosts';
 import { Suspense, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 const formatDate = (date: Date): string => {
   return date.toLocaleDateString('en-US', {
@@ -15,9 +16,12 @@ const formatDate = (date: Date): string => {
 };
 
 export default function Home() {
-  const [selectedTag, setSelectedTag] = useState<string>('All');
+  const searchParams = useSearchParams();
   const [search] = useState('');
   const { blogPosts, isLoading, error } = useBlogPosts();
+
+  // Derive selectedTag from URL
+  const selectedTag = searchParams.get('tag') || 'All';
 
   const filteredBlogs = blogPosts.filter(post => {
     const matchesSearch =
@@ -43,10 +47,6 @@ export default function Home() {
   const allTags = Array.from(allTagsSet);
   const tagCounts = tagCountsMap;
 
-  const handleTagClick = (tag: string) => {
-    setSelectedTag(tag);
-  };
-
   return (
     <div
       className="flex items-center justify-center min-h-screen"
@@ -55,7 +55,7 @@ export default function Home() {
         color: 'var(--color-text)'
       }}
     >
-      <div className="absolute top-0 left-0 z-0 w-full h-[400px] mask-[linear-gradient(to_top,transparent_25%,black_95%)] pointer-events-none">
+      <div className="absolute top-0 left-0 z-0 w-full h-[300px] mask-[linear-gradient(to_top,transparent_25%,black_95%)] pointer-events-none">
         <FlickeringGrid
           className="absolute top-0 left-0 size-full"
           squareSize={4}
@@ -66,7 +66,7 @@ export default function Home() {
         />
       </div>
       <main className="mx-auto w-full max-w-(--content-width) px-6 py-8">
-        <div className="relative z-10 max-w-6xl mx-auto flex flex-col md:flex-row gap-12 px-6 py-6">
+        <div className="relative top-16 z-10 max-w-6xl mx-auto flex flex-col md:flex-row gap-12 px-6 py-6">
           {/* Left — Blog List */}
           <div className="flex-1">
             {error ? (
@@ -97,7 +97,14 @@ export default function Home() {
               <h3 className="text-xl mb-4 font-semibold" style={{ color: 'var(--color-accent)' }}>
                 Browse By Category
               </h3>
-              <TagFilter tags={allTags} selectedTag={selectedTag} tagCounts={tagCounts} onTagClick={handleTagClick} />
+              <TagFilter
+                tags={allTags}
+                selectedTag={selectedTag}
+                tagCounts={tagCounts}
+                onTagClick={() => {
+                  /* URL update handled in TagFilter */
+                }}
+              />
             </div>
           </aside>
         </div>

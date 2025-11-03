@@ -5,10 +5,13 @@
   "packageManager": "pnpm@9.0.0",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "TURBOPACK=0 next build",
     "start": "next start",
     "lint": "eslint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "deploy": "opennextjs-cloudflare build && pnpm exec wrangler deploy",
+    "preview": "opennextjs-cloudflare build && pnpm exec wrangler dev",
+    "cf-typegen": "pnpm exec wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
@@ -26,6 +29,7 @@
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.11.0",
     "@tailwindcss/postcss": "^4",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
@@ -39,7 +43,8 @@
     "lint-staged": "^16.2.6",
     "prettier": "^3.6.2",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.45.3"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

@@ -41,9 +41,9 @@ export default async function BlogPost({ params }: PageProps) {
   const formattedDate = formatDate(date);
 
   return (
-    <div className="min-h-screen bg-background  mx-auto max-w-(--content-width) px-6 py-8">
+    <div className="min-h-screen bg-background  mx-auto max-w-(--content-width) sm:px-4 lg:px-6 py-8">
       <HashScrollHandler />
-      <div className="absolute top-0 left-0 z-0 w-full h-[400px] mask-[linear-gradient(to_top,transparent_25%,black_95%)] pointer-events-none">
+      <div className="absolute top-0 left-0 z-0 w-full h-[500px] mask-[linear-gradient(to_top,transparent_25%,black_95%)] pointer-events-none">
         <FlickeringGrid
           className="absolute top-0 left-0 size-full"
           squareSize={4}
@@ -54,9 +54,9 @@ export default async function BlogPost({ params }: PageProps) {
         />
       </div>
 
-      <div className="space-y-4 relative z-10">
+      <div className="space-y-4 z-10">
         <div className="max-w-7xl mx-auto flex flex-col gap-6 p-6">
-          <div className="flex flex-wrap items-center gap-3 gap-y-5 text-sm text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-3 gap-y-5 text-sm text-muted-foreground top-16">
             <>
               <Link href="/">
                 <ArrowLeft className="w-4 h-4" />
@@ -78,7 +78,10 @@ export default async function BlogPost({ params }: PageProps) {
             <time className="font-medium text-muted-foreground">{formattedDate}</time>
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tighter text-balance">
+          <h1
+            className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tighter text-balance"
+            style={{ color: 'var(--color-accent)' }}
+          >
             {frontmatter.title}
           </h1>
 
@@ -101,7 +104,7 @@ export default async function BlogPost({ params }: PageProps) {
               />
             </div>
           )} */}
-          <div className="p-6 lg:p-10">
+          <div className="md:p-6 lg:p-10">
             <article className="prose dark:prose-invert max-w-none prose-headings:scroll-mt-8 prose-headings:font-semibold prose-a:no-underline prose-headings:tracking-tight prose-headings:text-balance prose-lg">
               <MDXRemote source={content} components={MDX_COMPONENTS} />
             </article>
