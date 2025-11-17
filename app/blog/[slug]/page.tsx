@@ -8,8 +8,9 @@ import { getAuthor, isValidAuthor } from '@/lib/authors';
 import { HashScrollHandler } from '@/components/hash-scroll-handler';
 import { TableOfContents } from '@/components/table-of-content';
 import { FlickeringGrid } from '@/components/ui/canva/flicker-grid';
-import { loadBlogPost } from '@/helpers/file-helpers';
+import { getBlogPostList, loadBlogPost } from '@/helpers/file-helpers';
 import { MDX_COMPONENTS } from '@/components/mdx-component';
+import Image from 'next/image';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -24,7 +25,8 @@ const formatDate = (date: Date): string => {
 };
 
 export default async function BlogPost({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug: rawSlug } = await params;
+  const slug = decodeURIComponent(rawSlug);
 
   if (!slug || slug.length === 0) {
     notFound();
@@ -75,7 +77,6 @@ export default async function BlogPost({ params }: PageProps) {
                 ))}
               </div>
             )}
-            <time className="font-medium text-muted-foreground">{formattedDate}</time>
           </div>
 
           <h1
@@ -84,10 +85,9 @@ export default async function BlogPost({ params }: PageProps) {
           >
             {frontmatter.title}
           </h1>
+          <time className="font-medium text-muted-foreground text-md">{formattedDate}</time>
 
-          {frontmatter.description && (
-            <p className="text-muted-foreground max-w-4xl md:text-lg">{frontmatter.description}</p>
-          )}
+          {frontmatter.description && <p className="text-muted-foreground text-md">{frontmatter.description}</p>}
         </div>
       </div>
       <div className="flex relative max-w-7xl mx-auto px-4 md:px-0 z-10">
@@ -101,14 +101,13 @@ export default async function BlogPost({ params }: PageProps) {
                 fill
                 className="object-cover"
                 priority
+                loading="eager"
               />
             </div>
           )} */}
-          <div className="md:p-6 lg:p-10">
-            <article className="prose dark:prose-invert max-w-none prose-headings:scroll-mt-8 prose-headings:font-semibold prose-a:no-underline prose-headings:tracking-tight prose-headings:text-balance prose-lg">
-              <MDXRemote source={content} components={MDX_COMPONENTS} />
-            </article>
-          </div>
+          <article className="font-medium prose dark:prose-invert max-w-none prose-headings:scroll-mt-8 prose-headings:font-semibold prose-a:no-underline prose-headings:tracking-tight prose-headings:text-balance prose-lg">
+            <MDXRemote source={content} components={MDX_COMPONENTS} />
+          </article>
         </main>
 
         <aside className="hidden lg:block w-[350px] shrink-0 p-6 lg:p-10 bg-muted/60 dark:bg-muted/20">
@@ -116,7 +115,7 @@ export default async function BlogPost({ params }: PageProps) {
             {frontmatter.author && isValidAuthor(frontmatter.author) && (
               <AuthorCard author={getAuthor(frontmatter.author)} />
             )}
-            <div className="border border-border rounded-lg p-6 bg-card shadow-sm">
+            <div className="p-6 font-medium">
               <TableOfContents />
             </div>
           </div>
@@ -124,4 +123,9 @@ export default async function BlogPost({ params }: PageProps) {
       </div>
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  const posts = await getBlogPostList();
+  return posts.map(post => ({ slug: post.slug }));
 }

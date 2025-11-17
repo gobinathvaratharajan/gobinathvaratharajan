@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import { cookies } from 'next/headers';
 
 // Global CSS and site configuration
 import { siteConfig } from '@/lib/site-config';
@@ -40,19 +39,28 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Read theme from cookie (server-side)
-  const cookieStore = await cookies();
-  const savedTheme = cookieStore.get(COLOR_THEME_COOKIE_NAME);
-  const theme = (savedTheme?.value as 'light' | 'dark') || 'light';
+  // Default to light theme for static generation
+  // Theme will be applied client-side from cookie
+  const theme = 'light';
 
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      suppressHydrationWarning
-      data-color-theme={theme}
-    >
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning>
       <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const cookie = document.cookie
+                    .split('; ')
+                    .find(row => row.startsWith('${COLOR_THEME_COOKIE_NAME}='));
+                  const theme = cookie ? cookie.split('=')[1] : 'light';
+                  document.documentElement.setAttribute('data-color-theme', theme);
+                } catch (e) {}
+              })();
+            `
+          }}
+        />
         <ThemeProvider initialTheme={theme}>
           <SiteNav initialTheme={theme} />
           {children}

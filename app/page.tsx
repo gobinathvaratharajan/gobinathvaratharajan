@@ -15,7 +15,7 @@ const formatDate = (date: Date): string => {
   });
 };
 
-export default function Home() {
+function HomeContent() {
   const searchParams = useSearchParams();
   const [search] = useState('');
   const { blogPosts, isLoading, error } = useBlogPosts();
@@ -48,8 +48,60 @@ export default function Home() {
   const tagCounts = tagCountsMap;
 
   return (
+    <div className="relative top-16 z-10 max-w-6xl mx-auto flex flex-col md:flex-row gap-12 lg:p-6 md:p-2 overflow-visible">
+      {/* Tag Filter - Shows first on mobile, right on desktop */}
+      <aside className="w-full md:w-64 overflow-visible md:order-2">
+        <div className="md:sticky md:top-24 overflow-visible">
+          <div className="pb-3.5">
+            <h3 className="lg:text-xl md:text-lg mb-4 font-semibold uppercase" style={{ color: 'var(--color-accent)' }}>
+              Browse By Category
+            </h3>
+            <TagFilter tags={allTags} selectedTag={selectedTag} tagCounts={tagCounts} />
+          </div>
+          <div className="pt-3.5 hidden md:block">
+            <h3 className="lg:text-xl md:text-lg mb-4 font-semibold uppercase" style={{ color: 'var(--color-accent)' }}>
+              Popular Category
+            </h3>
+            Coming Soon...
+          </div>
+        </div>
+      </aside>
+
+      {/* Blog List - Shows second on mobile, left on desktop */}
+      <div className="flex-1 md:order-1">
+        <h3
+          className="lg:pl-6 md:pl-1 lg:text-xl md:text-lg mb-4 font-semibold uppercase"
+          style={{ color: 'var(--color-accent)' }}
+        >
+          Articles
+        </h3>
+        {error ? (
+          <div className="text-red-500">Error loading posts: {error.message}</div>
+        ) : isLoading ? (
+          <div>Loading articles...</div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-1 gap-8">
+            {filteredBlogs.map(blog => (
+              <BlogCard
+                key={blog.slug}
+                url={`/blog/${blog.slug}`}
+                title={blog.title}
+                description={blog.description || ''}
+                date={formatDate(new Date(blog.date))}
+                thumbnail={blog.thumbnail || ''}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function Home() {
+  return (
     <div
-      className="flex items-center justify-center min-h-screen"
+      className="flex items-center justify-center min-h-screen overflow-x-hidden"
       style={{
         backgroundColor: 'var(--color-page-background)',
         color: 'var(--color-text)'
@@ -61,53 +113,20 @@ export default function Home() {
           squareSize={4}
           gridGap={6}
           color="#6B7280"
-          maxOpacity={0.2}
-          flickerChance={0.05}
+          maxOpacity={0.4}
+          flickerChance={0.1}
         />
       </div>
       <main className="mx-auto w-full max-w-(--content-width) px-6 py-8">
-        <div className="relative top-16 z-10 max-w-6xl mx-auto flex flex-col md:flex-row gap-12 px-6 py-6">
-          {/* Left — Blog List */}
-          <div className="flex-1">
-            {error ? (
-              <div className="text-red-500">Error loading posts: {error.message}</div>
-            ) : isLoading ? (
-              <div>Loading articles...</div>
-            ) : (
-              <Suspense fallback={<div>Loading articles...</div>}>
-                <div className="grid grid-cols-1 sm:grid-cols-1 gap-8">
-                  {filteredBlogs.map(blog => (
-                    <BlogCard
-                      key={blog.slug}
-                      url={`/blog/${blog.slug}`}
-                      title={blog.title}
-                      description={blog.description || ''}
-                      date={formatDate(new Date(blog.date))}
-                      thumbnail={blog.thumbnail || ''}
-                    />
-                  ))}
-                </div>
-              </Suspense>
-            )}
-          </div>
-
-          {/* Right — Tag Filter */}
-          <aside className="w-full md:w-64">
-            <div className="sticky top-24">
-              <h3 className="text-xl mb-4 font-semibold" style={{ color: 'var(--color-accent)' }}>
-                Browse By Category
-              </h3>
-              <TagFilter
-                tags={allTags}
-                selectedTag={selectedTag}
-                tagCounts={tagCounts}
-                onTagClick={() => {
-                  /* URL update handled in TagFilter */
-                }}
-              />
+        <Suspense
+          fallback={
+            <div className="relative top-16 z-10 max-w-6xl mx-auto flex flex-col md:flex-row gap-12 px-6 py-6">
+              <div>Loading...</div>
             </div>
-          </aside>
-        </div>
+          }
+        >
+          <HomeContent />
+        </Suspense>
       </main>
     </div>
   );

@@ -4,7 +4,8 @@ import { siteConfig } from '@/lib/site-config';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   try {
-    const { slug } = await params;
+    const { slug: rawSlug } = await params;
+    const slug = decodeURIComponent(rawSlug);
 
     if (!slug || slug.length === 0) {
       return {

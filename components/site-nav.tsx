@@ -18,7 +18,15 @@ export function SiteNav({
 }) {
   const [theme, setTheme] = useState(initialTheme);
 
-  // Initialize theme on mount
+  // Initialize theme on mount - read from cookie if available
+  useEffect(() => {
+    const savedTheme = Cookie.get(COLOR_THEME_COOKIE_NAME) as 'light' | 'dark' | undefined;
+    if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
+      setTheme(savedTheme);
+    }
+  }, []);
+
+  // Apply theme to DOM
   useEffect(() => {
     const root = document.documentElement;
     const colors = theme === 'light' ? LIGHT_TOKENS : DARK_TOKENS;

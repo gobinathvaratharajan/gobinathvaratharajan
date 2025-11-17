@@ -7,11 +7,12 @@
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
-  },
-  "r2_buckets": [
-    {
-      "binding": "NEXT_INC_CACHE_R2_BUCKET",
-      "bucket_name": "next-inc-cache"
-    }
-  ]
+  }
+  // for ISR or PPR needed for Incremental Cache
+  // "r2_buckets": [
+  //   {
+  //     "binding": "NEXT_INC_CACHE_R2_BUCKET",
+  //     "bucket_name": "next-inc-cache"
+  //   }
+  // ]
 }

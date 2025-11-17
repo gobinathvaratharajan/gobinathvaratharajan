@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, createContext, useContext } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -12,7 +13,7 @@ interface DrawerContextType {
 
 const DrawerContext = createContext<DrawerContextType | undefined>(undefined);
 
-const useDrawer = () => {
+export const useDrawer = () => {
   const context = useContext(DrawerContext);
   if (!context) {
     throw new Error('Drawer components must be used within a Drawer');
@@ -65,7 +66,10 @@ interface DrawerContentProps {
 export function DrawerContent({ children, className }: DrawerContentProps) {
   const { isOpen, setIsOpen } = useDrawer();
 
-  return (
+  // Check if we're in the browser
+  if (typeof window === 'undefined') return null;
+
+  const content = (
     <AnimatePresence mode="wait">
       {isOpen && (
         <>
@@ -86,6 +90,7 @@ export function DrawerContent({ children, className }: DrawerContentProps) {
               duration: 0.25,
               ease: [0.16, 1, 0.3, 1]
             }}
+            style={{ backgroundColor: 'inherit' }}
             className={cn(
               'fixed bottom-3 left-0 right-0 bg-background border-t border-border rounded-lg z-50 max-h-[70vh] overflow-hidden w-[95%] mx-auto flex flex-col',
               className
@@ -97,6 +102,8 @@ export function DrawerContent({ children, className }: DrawerContentProps) {
       )}
     </AnimatePresence>
   );
+
+  return createPortal(content, document.body);
 }
 
 interface DrawerHeaderProps {
