@@ -5,11 +5,14 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { AuthorKey, getAuthor } from '@/lib/authors';
 import { AuthorCard } from './author-card';
 
-interface CodeProps {
+// Make CodeProps compatible with a native <pre> element so MDX component
+// mapping (key: 'pre') matches the expected HTMLPreElement shape.
+// Use a type based on the native <pre> props so a function
+// with this signature is assignable to the expected MDX 'pre' component type.
+type CodeProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLPreElement>, HTMLPreElement> & {
   children?: React.ReactNode;
   className?: string;
-  [key: string]: unknown;
-}
+};
 
 interface AuthorProps {
   id: AuthorKey;
