@@ -24,6 +24,8 @@ const formatDate = (date: Date): string => {
   });
 };
 
+export const revalidate = 3600; // Revalidate every hour
+
 export default async function BlogPost({ params }: PageProps) {
   const { slug: rawSlug } = await params;
   const slug = decodeURIComponent(rawSlug);
@@ -57,7 +59,7 @@ export default async function BlogPost({ params }: PageProps) {
       </div>
 
       <div className="space-y-4 z-10">
-        <div className="max-w-7xl mx-auto flex flex-col gap-6 p-6">
+        <div className="max-w-7xl mx-auto flex flex-col gap-6">
           <div className="flex flex-wrap items-center gap-3 gap-y-5 text-sm text-muted-foreground top-16">
             <>
               <Link href="/">
@@ -79,10 +81,7 @@ export default async function BlogPost({ params }: PageProps) {
             )}
           </div>
 
-          <h1
-            className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tighter text-balance"
-            style={{ color: 'var(--color-accent)' }}
-          >
+          <h1 className="sm:text-2xl md:text-4xl lg:text-5xl font-medium tracking-tighter text-balance">
             {frontmatter.title}
           </h1>
           <time className="font-medium text-muted-foreground text-md">{formattedDate}</time>

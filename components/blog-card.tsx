@@ -44,7 +44,7 @@ export function BlogCard({ url, title, description, date }: BlogCardProps) {
           className="lg:p-6 md:p-4 lg:pt-0 text-sm font-medium text-primary flex items-center gap-1 relative z-10"
         >
           {/* Fancy underline */}
-          <span className="relative">
+          <span className="relative font-semibold">
             Read more
             <motion.span
               layout

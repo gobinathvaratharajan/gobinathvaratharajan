@@ -30,7 +30,7 @@ export const LIGHT_COLORS: Record<string, string> = {
   '--color-gray-700': 'hsl(0deg 0% 40%)',
   '--color-gray-900': 'hsl(0deg 0% 10%)',
   '--color-gray-1000': 'black',
-  '--color-accent': 'hsl(333deg 100% 55%)'
+  '--color-accent': 'hsl(273deg 100% 50%)'
 };
 
 export const DARK_COLORS: Record<string, string> = {

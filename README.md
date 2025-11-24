@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gobinath Varatharajan - Personal Portfolio & Blog
 
-## Getting Started
+A high-performance personal portfolio and blog built with the modern React ecosystem, optimized for Cloudflare Pages.
 
-First, run the development server:
+## 🚀 Tech Stack
+
+- **Framework:** [Next.js 14 (App Router)](https://nextjs.org/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/)
+- **Deployment:** [Cloudflare Pages](https://pages.cloudflare.com/) via [OpenNext](https://opennext.js.org/)
+- **Content:** MDX for blog posts
+- **Testing:** Vitest & React Testing Library
+
+## 🛠️ Features
+
+- **Server-Side Rendering (SSR)** & **Static Site Generation (SSG)**
+- **Incremental Static Regeneration (ISR)** for blog posts (revalidated every hour)
+- **Edge Deployment** on Cloudflare
+- **Performance Optimized** (LCP, Suspense, Code Splitting)
+- **Dark Mode** support
+
+## 🏁 Getting Started
+
+### Prerequisites
+
+- Node.js 20+
+- pnpm (recommended) or npm
+
+### Installation
+
+```bash
+npm install
+# or
+pnpm install
+```
+
+### Local Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Running Tests
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run test
+```
 
-## Learn More
+## ☁️ Deployment (Cloudflare)
 
-To learn more about Next.js, take a look at the following resources:
+This project is configured for Cloudflare Pages using OpenNext.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Important: R2 Bucket Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+For Incremental Static Regeneration (ISR) to work correctly, you **MUST** create an R2 bucket in your Cloudflare dashboard:
 
-## Deploy on Vercel
+1.  Go to Cloudflare Dashboard > R2.
+2.  Create a new bucket named `next-inc-cache`.
+3.  This bucket is bound in `wrangler.jsonc` to enable caching.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Deploy Command
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run deploy
+```
+
+## 📂 Project Structure
+
+- `/app`: App Router pages and layouts
+- `/components`: Reusable UI components
+- `/lib`: Utility functions and constants
+- `/content`: MDX blog posts (if applicable)
+- `wrangler.jsonc`: Cloudflare worker configuration
+- `open-next.config.ts`: OpenNext configuration
+
+## 📄 License
+
+MIT

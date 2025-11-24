@@ -8,6 +8,7 @@ import { metadataKeywords } from './metadata';
 import { COLOR_THEME_COOKIE_NAME } from '@/lib/const';
 import './globals.css';
 import localFont from 'next/font/local';
+import Footer from '@/components/footer';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -64,6 +65,7 @@ export default async function RootLayout({
         <ThemeProvider initialTheme={theme}>
           <SiteNav initialTheme={theme} />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

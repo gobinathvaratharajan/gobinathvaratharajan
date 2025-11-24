@@ -24,7 +24,7 @@ const DesktopTagFilter = ({
         className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-all ${
           selectedTag === tag
             ? 'bg-primary text-primary-foreground shadow-sm'
-            : 'bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground border border-dashed'
+            : 'bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground'
         }`}
         style={
           selectedTag === tag

@@ -1,0 +1,134 @@
+ WARN  Unsupported engine: wanted: {"node":">=20.9.0"} (current: {"node":"v18.20.8","pnpm":"9.0.0"})
+
+> gobinathvaratharajan@0.1.0 test /Users/gvt836/Gobinath/Coding/gobinathvaratharajan
+> vitest "run"
+
+
+ RUN  v1.6.1 /Users/gvt836/Gobinath/Coding/gobinathvaratharajan
+
+stderr | __tests__/home.test.tsx > Home Page > renders without crashing
+Error: Uncaught [Error: [vitest] No "useRouter" export is defined on the "next/navigation" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+]
+    at reportException (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) Error: [vitest] No "useRouter" export is defined on the "next/navigation" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+    at VitestMocker.createError (file:///Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/vitest@1.6.1_@types+node@20.19.24_jsdom@24.1.3_lightningcss@1.30.2_terser@5.16.9/node_modules/vitest/dist/vendor/execute.fL3szUAI.js:79:19)
+    at Object.get (file:///Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/vitest@1.6.1_@types+node@20.19.24_jsdom@24.1.3_lightningcss@1.30.2_terser@5.16.9/node_modules/vitest/dist/vendor/execute.fL3szUAI.js:153:22)
+    at TagFilter (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/components/tag-filter.tsx:110:18)
+    at renderWithHooks (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3) {
+  codeFrame: 'vi.mock("next/navigation", async (importOriginal) => {\n' +
+    '  const actual = await importOriginal()\n' +
+    '  return {\n' +
+    '    ...actual,\n' +
+    '    // your mocked methods\n' +
+    '  }\n' +
+    '})'
+}
+Error: Uncaught [Error: [vitest] No "useRouter" export is defined on the "next/navigation" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+]
+    at reportException (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) Error: [vitest] No "useRouter" export is defined on the "next/navigation" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+    at VitestMocker.createError (file:///Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/vitest@1.6.1_@types+node@20.19.24_jsdom@24.1.3_lightningcss@1.30.2_terser@5.16.9/node_modules/vitest/dist/vendor/execute.fL3szUAI.js:79:19)
+    at Object.get (file:///Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/vitest@1.6.1_@types+node@20.19.24_jsdom@24.1.3_lightningcss@1.30.2_terser@5.16.9/node_modules/vitest/dist/vendor/execute.fL3szUAI.js:153:22)
+    at TagFilter (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/components/tag-filter.tsx:110:18)
+    at renderWithHooks (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3) {
+  codeFrame: 'vi.mock("next/navigation", async (importOriginal) => {\n' +
+    '  const actual = await importOriginal()\n' +
+    '  return {\n' +
+    '    ...actual,\n' +
+    '    // your mocked methods\n' +
+    '  }\n' +
+    '})'
+}
+The above error occurred in the <TagFilter> component:
+
+    at TagFilter (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/components/tag-filter.tsx:164:22)
+    at div
+    at div
+    at aside
+    at div
+    at HomeContent (/Users/gvt836/Gobinath/Coding/gobinathvaratharajan/app/page.tsx:25:42)
+    at Suspense
+    at main
+    at div
+    at Home
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+ ❯ __tests__/home.test.tsx  (1 test | 1 failed) 20ms
+   ❯ __tests__/home.test.tsx > Home Page > renders without crashing
+     → [vitest] No "useRouter" export is defined on the "next/navigation" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  __tests__/home.test.tsx > Home Page > renders without crashing
+Error: [vitest] No "useRouter" export is defined on the "next/navigation" mock. Did you forget to return it from "vi.mock"?
+If you need to partially mock a module, you can use "importOriginal" helper inside:
+
+vi.mock("next/navigation", async (importOriginal) => {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    // your mocked methods
+  }
+})
+
+ ❯ TagFilter components/tag-filter.tsx:110:18
+    108| 
+    109| export function TagFilter({ tags, selectedTag, tagCounts }: TagFilterP…
+    110|   const router = useRouter();
+       |                  ^
+    111|   const pathname = usePathname();
+    112| 
+ ❯ renderWithHooks node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18
+ ❯ mountIndeterminateComponent node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13
+ ❯ beginWork node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16
+ ❯ beginWork$1 node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27465:14
+ ❯ performUnitOfWork node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12
+ ❯ workLoopSync node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26505:5
+ ❯ renderRootSync node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26473:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  19:53:27
+   Duration  1.00s (transform 89ms, setup 0ms, collect 329ms, tests 20ms, environment 334ms, prepare 89ms)
+
+ ELIFECYCLE  Test failed. See above for more details.

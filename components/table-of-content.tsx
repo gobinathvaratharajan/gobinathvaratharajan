@@ -189,20 +189,18 @@ export function TableOfContents({ className }: TableOfContentsProps) {
 
   return (
     <div className={cn('space-y-2', className)}>
-      <h4 className="text-xl font-semibold text-foreground mb-4" style={{ color: 'var(--color-accent)' }}>
-        Table of Content
-      </h4>
+      <h4 className="text-xl font-semibold text-foreground mb-4">Table of Content</h4>
       <nav>
-        <ul className="space-y-2">
+        <ul className="space-y-2 opacity-80 hover:opacity-100 transition-opacity">
           {headings.map(heading => (
             <li key={heading.id} style={{ paddingLeft: `${(heading.level - 2) * 12}px` }}>
               <button
                 onClick={() => handleClick(heading.id)}
                 style={{
-                  color: activeId === heading.id ? 'rgb(99, 99, 255)' : ''
+                  color: activeId === heading.id ? 'oklch(62.3% 0.214 259.815)' : ''
                 }}
                 className={cn(
-                  'block w-full text-left text-sm transition-colors hover:text-foreground text-muted-foreground',
+                  'block w-full text-left text-sm transition-colors hover:text-foreground text-muted-foreground hover:cursor-pointer',
                   {
                     'text-primary font-medium': activeId === heading.id
                   }

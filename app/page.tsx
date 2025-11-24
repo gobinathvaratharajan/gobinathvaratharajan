@@ -53,15 +53,11 @@ function HomeContent() {
       <aside className="w-full md:w-64 overflow-visible md:order-2">
         <div className="md:sticky md:top-24 overflow-visible">
           <div className="pb-3.5">
-            <h3 className="lg:text-xl md:text-lg mb-4 font-semibold uppercase" style={{ color: 'var(--color-accent)' }}>
-              Browse By Category
-            </h3>
+            <h3 className="lg:text-xl md:text-lg mb-4 font-semibold uppercase">Browse By Category</h3>
             <TagFilter tags={allTags} selectedTag={selectedTag} tagCounts={tagCounts} />
           </div>
           <div className="pt-3.5 hidden md:block">
-            <h3 className="lg:text-xl md:text-lg mb-4 font-semibold uppercase" style={{ color: 'var(--color-accent)' }}>
-              Popular Category
-            </h3>
+            <h3 className="lg:text-xl md:text-lg mb-4 font-semibold uppercase">Popular Category</h3>
             Coming Soon...
           </div>
         </div>
