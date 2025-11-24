@@ -120,4 +120,4 @@ export const MDX_COMPONENTS = {
   ol: (props: React.HTMLAttributes<HTMLOListElement>) => <ol className="list-decimal pl-6 space-y-2 my-4" {...props} />,
   li: (props: React.HTMLAttributes<HTMLLIElement>) => <li className="leading-relaxed" {...props} />,
   p: (props: React.HTMLAttributes<HTMLParagraphElement>) => <p className="my-4 leading-relaxed" {...props} />
-};
+} satisfies Record<string, unknown>;
